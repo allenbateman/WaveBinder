@@ -1,5 +1,5 @@
 {
-  "name": "com.allenbateman.tfg-audiotool",
+  "name": "com.allenbateman.wavebinder",
   "version": "1.0.0",
   "displayName": "WaveBinder",
   "description": "Final grade project. An audio tool that reads frequency sprectum from audio sources that lets you map any simple data type you desire!",
@@ -11,5 +11,4 @@
     "email": "allen.bateman.neubert@estudiantat.upc.edu",
     "url": "https://github.com/allenbateman/WaveBinder"
   }
-
 }
