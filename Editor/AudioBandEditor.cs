@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-namespace WaveBinderEditor
+namespace WaveBinder.Editor
 {
     public class AudioBandEditor
     {

@@ -1,15 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 
-namespace WaveBinder
+namespace WaveBinder.Runtime
 {
     [RequireComponent(typeof(AudioSource))]
     public class AudioAnalyzer : MonoBehaviour
@@ -71,10 +69,6 @@ namespace WaveBinder
         // this variable will smooth the visualization
         public float _audioProfiler;
 
-        private void OnEnable()
-        {
-
-        }
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();

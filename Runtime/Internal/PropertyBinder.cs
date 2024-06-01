@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace WaveBinder
+namespace WaveBinder.Runtime
 {
     [System.Serializable]
     public abstract class PropertyBinder

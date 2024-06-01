@@ -3,12 +3,11 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using WaveBinder;
+using WaveBinder.Runtime;
 
 
-namespace WaveBinderEditor
+namespace WaveBinder.Editor
 {
-
     [CustomEditor(typeof(AudioAnalyzer))]
     public class AudioAnalyzerEditor : Editor
     {

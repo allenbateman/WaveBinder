@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace WaveBinderEditor
+namespace WaveBinder.Editor
 {
     public class ComponentLister<T> where T : Component
     {

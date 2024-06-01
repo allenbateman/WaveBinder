@@ -5,10 +5,9 @@ using WaveBinder;
 using UnityEditor.Graphs;
 using System.Diagnostics.Eventing.Reader;
 using System;
-using UnityEditor.ShaderGraph.Internal;
 using System.Linq;
 
-namespace WaveBinderEditor
+namespace WaveBinder.Editor
 {
     sealed class PropertyBinderEditor
     {

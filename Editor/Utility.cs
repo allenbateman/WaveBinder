@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace WaveBinderEditor
+namespace WaveBinder.Editor
 {
     struct Label
     {

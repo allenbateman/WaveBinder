@@ -5,7 +5,7 @@ using UnityEditor;
 using System;
 using System.Linq;
 
-namespace WaveBinderEditor
+namespace WaveBinder.Editor
 {
     public class PropertySelector
     {
