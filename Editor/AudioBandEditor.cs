@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Rendering;
-using System.Linq;
-
 namespace WaveBinder.Editor
 {
     public class AudioBandEditor
@@ -47,7 +45,7 @@ namespace WaveBinder.Editor
 
             //header 
             CoreEditorUtils.DrawSplitter();
-            CoreEditorUtils.DrawHeader(new GUIContent("Audio band " + i.ToString()));
+            CoreEditorUtils.DrawHeader("Audio band " + i.ToString());
 
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(finder["_minRangeFrequency"]);

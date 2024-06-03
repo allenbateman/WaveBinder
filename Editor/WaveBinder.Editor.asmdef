@@ -1,12 +1,11 @@
 {
-    "name": "WaveBinder.Runtime",
+    "name": "WaveBinder.Editor",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:fde80bee9518f8a49a760374332bd0fb"
+    ],
     "includePlatforms": [
-        "Editor",
-        "LinuxStandalone64",
-        "macOSStandalone",
-        "WindowsStandalone64"
+        "Editor"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
