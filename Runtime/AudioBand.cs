@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using WaveBinder.Runtime;
 
 [Serializable]
 public class AudioBand
@@ -44,16 +45,10 @@ public class AudioBand
     public void MapFrequencyToSamples(float frequencyResolution,int nSamples)
     {
 
-        if (_minRangeFrequency < 1) return;
-        if (_maxRangeFrequency < 1) return;
+        var result = LinearInterpolation.MapRange(_minRangeFrequency, _maxRangeFrequency, 20, 20000, 0, nSamples);
 
-        // Calculate indices for the desired frequency range
-        int minIndex = Mathf.FloorToInt(_minRangeFrequency / frequencyResolution);
-        int maxIndex = Mathf.CeilToInt(_maxRangeFrequency / frequencyResolution);
-
-        // Ensure indices are within bounds
-        _minRangeSample = Mathf.Clamp(minIndex, 0,  nSamples-1);
-        _maxRangeSample = Mathf.Clamp(maxIndex, 0,  nSamples-1);
+        _minRangeSample = result.Item1;
+        _maxRangeSample = result.Item2;
 
         Debug.Log("Audio band sample range" + _minRangeSample + ", " +  _maxRangeSample);
     }

@@ -14,9 +14,16 @@ namespace WaveBinder.Runtime
         AudioSource _audioSource;
         public AudioClip _audioClip;
         public List<AudioBand> _bandList = new List<AudioBand>() { new AudioBand(0,20000)};
+       
         [PowerOfTwoSlider]
         public int _nSamples = 512;
         public FFTWindow _fftWindow;
+        public enum _Channels
+        {
+            Stereo, Left, Right
+        }
+        public _Channels _channel = new _Channels();
+
         private int _audioSamplingRate;
         private float _frequencyResolution;
         private float[] _spectrum;
@@ -40,22 +47,7 @@ namespace WaveBinder.Runtime
         }
         #endregion
 
-        #region Old AudioAuanlyzer
-        public enum _Channels
-        {
-            Stereo, Left, Right
-        }
 
-        public _Channels _channel = new _Channels();
-        // number of samples taken form the auido range
-        // 0->0 & 512->20k
-        public int nSamples = 512;
-
-        //[HideInInspector]
-        public float[] _audioBand, _audioBandBuffer;
-
-        //how fast the buffer empties
-        public float _bufferDecay;
 
         //amplitude
         [HideInInspector]
@@ -91,7 +83,7 @@ namespace WaveBinder.Runtime
         }
         void Start()
         {
-            if (!_NoAudioClip)
+            if (_NoAudioClip)
             {
                 return;
             }
@@ -101,7 +93,7 @@ namespace WaveBinder.Runtime
 
         void Update()
         {
-            if(!_NoAudioClip)
+            if(_NoAudioClip)
             {
                 return;
             }
@@ -119,7 +111,7 @@ namespace WaveBinder.Runtime
             {
                 foreach (var propertyBinder in _propertyBinders)
                 {
-                    propertyBinder.Level = _bandList[propertyBinder.AudioBand]._normalizedAmpBuffer;//NAN Value
+                    propertyBinder.Level = _bandList[propertyBinder.AudioBand]._normalizedAmpBuffer;
                 }
             }
         }
@@ -173,14 +165,14 @@ namespace WaveBinder.Runtime
         }
         void UpdateAudioBands()
         {
-            _frequencyResolution = (float)_audioSamplingRate / nSamples;
+            Debug.Log("nSample: "+_nSamples);
+            _frequencyResolution = (float)_audioSamplingRate / _nSamples;
             Debug.Log("Frequency resolution: " + _frequencyResolution);
 
             foreach (var band in _bandList)
             {
-                band.MapFrequencyToSamples(_frequencyResolution, nSamples);
+                band.MapFrequencyToSamples(_frequencyResolution, _nSamples);
             }
         }
-        #endregion
     }
 }

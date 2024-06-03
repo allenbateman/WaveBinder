@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace WaveBinder.Editor
-{
+{   
     struct Label
     {
         GUIContent _guiContent;
