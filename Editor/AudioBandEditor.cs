@@ -1,12 +1,7 @@
-using Codice.Client.BaseCommands.BranchExplorer;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Security.Cryptography;
+using UnityEngine;
 using UnityEditor;
 using UnityEditor.Rendering;
-using UnityEngine;
+using System.Linq;
 
 namespace WaveBinder.Editor
 {

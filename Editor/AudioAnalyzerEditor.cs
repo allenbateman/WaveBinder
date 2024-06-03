@@ -1,15 +1,12 @@
-using System.Reflection.Emit;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 using WaveBinder.Runtime;
 
 
 namespace WaveBinder.Editor
 {
     [CustomEditor(typeof(AudioAnalyzer))]
-    public class AudioAnalyzerEditor : Editor
+    public class AudioAnalyzerEditor : UnityEditor.Editor
     {
         PropertyBinderEditor _propertyBinderEditor;
         AudioBandEditor      _audioBandEditor;

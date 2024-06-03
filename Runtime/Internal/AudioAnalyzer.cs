@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -69,25 +67,44 @@ namespace WaveBinder.Runtime
         // this variable will smooth the visualization
         public float _audioProfiler;
 
+        private bool _NoAudioClip;
+
         private void Awake()
         {
+            _audioSamplingRate = AudioSettings.outputSampleRate;
             _audioSource = GetComponent<AudioSource>();
             if (_audioClip != null)
             {
                 _audioSource.clip = _audioClip;
                 _audioSource.Play();    
             }
-            _audioSamplingRate = AudioSettings.outputSampleRate;
+
+            if(_audioSource.clip != null && _audioClip == null)
+            {
+                _audioClip = _audioSource.clip;
+            }
+            if(!_audioClip && !_audioSource.clip)
+            {
+                _NoAudioClip = true;
+                Debug.LogWarning("There is no audio clip set in audio analyser");
+            }
         }
         void Start()
         {
-
+            if (!_NoAudioClip)
+            {
+                return;
+            }
             UpdateAudioBands();
             AudioProfiler(_audioProfiler);
         }
 
         void Update()
         {
+            if(!_NoAudioClip)
+            {
+                return;
+            }
             GetSpectrumData();            
             GenerateFrequencyBands();
 
