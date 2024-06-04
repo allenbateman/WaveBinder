@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -77,10 +74,23 @@ namespace WaveBinder.Runtime
             TargetProperty = Vector3.Lerp(value0,value1, level);
         }
     }
+    //binder for vecto4 porperties
+    public sealed class Vector4PropertyBinder : GenericPropertyBinder<Vector4>
+    {
+        public Vector4 value0 = Vector4.zero;
+        public Vector4 value1 = Vector4.one;
+
+        protected override void OnSetLevel(float level)
+        {
+            TargetProperty = Vector4.Lerp(value0, value1, level);
+        }
+    }
     //binder for color porperties
     public sealed class ColorPropertyBinder : GenericPropertyBinder<Color>
     {
+        [ColorUsage(true, true)]
         public Color value0 = Color.black;
+        [ColorUsage(true, true)]
         public Color value1 = Color.white;
 
         protected override void OnSetLevel(float level)

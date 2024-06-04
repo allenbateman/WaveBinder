@@ -59,6 +59,7 @@ namespace WaveBinder.Editor
             OnAddNewPropertyBinderItem<FloatPropertyBinder>(menu);
             OnAddNewPropertyBinderItem<Vector2PropertyBinder>(menu);
             OnAddNewPropertyBinderItem<Vector3PropertyBinder>(menu);
+            OnAddNewPropertyBinderItem<Vector4PropertyBinder>(menu);
             OnAddNewPropertyBinderItem<ColorPropertyBinder>(menu);
 
             return menu;
@@ -105,7 +106,6 @@ namespace WaveBinder.Editor
                 PropertySelector.GetInstance(target, finder["_propertyType"]).ShowGUI(finder["PropertyName"])
                 && ShowAudioBandGUI(finder)) 
             {
-               // EditorGUILayout.PropertyField(finder["AudioBand"],Styles.AudioBand);
                 EditorGUILayout.PropertyField(finder["value0"], Styles.Value0);
                 EditorGUILayout.PropertyField(finder["value1"], Styles.Value1);
             }

@@ -1,9 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEditor;
+using UnityEngine;
 using System;
 using System.Linq;
+
 
 namespace WaveBinder.Editor
 {
@@ -33,7 +33,6 @@ namespace WaveBinder.Editor
         {
             // determine the target propety type using reflection
             _propertyType = Type.GetType(spPropertyType.stringValue);
-
 
             //Porperty names candidates
             _candidates = spTarget.objectReferenceValue.GetType().
