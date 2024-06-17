@@ -1,6 +1,6 @@
 # WaveBinder
 
-WaveBinder is a tool for Unity that allows real-time audio processing to create audio-reactive elements in a game. It provides an easy to use interface that allows to bind custom properties to different frequency range and interpolate the value given the amplitude of the samples.
+WaveBinder is a tool for Unity that allows real-time audio processing to create audio-reactive elements in a game. It provides an easy-to-use interface that allows the binding of custom properties to different frequency ranges and interpolates the value given the average amplitude of the sample range.
 
 ## Requirements
 
@@ -8,6 +8,8 @@ WaveBinder is a tool for Unity that allows real-time audio processing to create 
 * Unity 2022.3.0f1 or later
   
 ### Installation
+
+To add the package to your Unity project, go to Window -> Package Manger -> Left top corner and click  the "+", finally select the "Add package from git URL" and paste the following link.
 
 https://github.com/allenbateman/WaveBinder.git
 
@@ -24,15 +26,15 @@ https://github.com/allenbateman/WaveBinder.git
 
 ### Audio Bands
 
-The audio bands gives you the posibility to select what frequency range to analyse and returns the normalised average amplitude of the selected range, it also has a smooth factor value to reduce the drastic change of values.
+The audio bands give you the possibility to select what frequency range to analyse and return the normalised average amplitude of the selected range, it also has a smooth factor value to reduce the drastic change of values.
 
 ![AudioBand](https://github.com/allenbateman/WaveBinder/assets/57528826/225b2574-b918-48d6-ace5-342452057735)
 
 ### Property Binders
 
-Property binders allows you to add any component and select what porperty of the component to be audio driven.
+Property binders allow you to add any component and select what property of the component to be audio-driven.
 
-Internally it uses interpolation to interpolate between to given values for that parameter, using the audio band data as the value used to interpolate.
+Internally it uses interpolation to interpolate between two given values for that parameter, using the audio band data as the value used to interpolate.
 
 ![PropertyBinder](https://github.com/allenbateman/WaveBinder/assets/57528826/87ed1f27-aad8-4937-bb66-896f0d91d53d)
 
