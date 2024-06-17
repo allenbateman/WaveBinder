@@ -20,6 +20,7 @@ https://github.com/allenbateman/WaveBinder.git
 
 ## Audio Analyser 
 
+The audio analyser component is the main and only component of the tool, it allows you to add a desired audio clip to analyse, select the number of samples (the sample resolution) and also to select the windowing algorithm to analyse the audio clip. 
 
 ![AudioAnalyser Component](https://github.com/allenbateman/WaveBinder/assets/57528826/2c1cdba2-573b-47a9-b8f0-4151f1454936)
 
