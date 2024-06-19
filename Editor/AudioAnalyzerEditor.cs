@@ -17,7 +17,7 @@ namespace WaveBinder.Editor
         SerializedProperty _channel;
         SerializedProperty _bandList;
 
-
+        bool _DispalySpectrum;
         Texture2D _spectrumTex;
 
         private void OnEnable()
@@ -48,13 +48,17 @@ namespace WaveBinder.Editor
             //EditorGUILayout.PropertyField(_bandList);
 
 
-            //RenderAudioSpectrum();
-            //draw texture here
-            if(_spectrumTex != null)
+            _DispalySpectrum = EditorGUILayout.Toggle("Display Spectrum", _DispalySpectrum);
+            if(_DispalySpectrum)
             {
-                GUILayout.Label(_spectrumTex);
+                RenderAudioSpectrum();
+                //draw texture here
+                if (_spectrumTex != null)
+                {
+                    GUILayout.Label(_spectrumTex);
+                }
             }
-          
+
 
             serializedObject.ApplyModifiedProperties();
 

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.PackageManager.UI;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -16,16 +18,13 @@ namespace WaveBinder.Runtime
         public List<AudioBand> _bandList = new List<AudioBand>() { new AudioBand(0,20000)};
        
         [PowerOfTwoSlider]
-        public int _nSamples = 512;
+        public int _nSamples = 128;
         public FFTWindow _fftWindow;
         public enum _Channels
         {
             Stereo, Left, Right
         }
         public _Channels _channel = new _Channels();
-
-        private int _audioSamplingRate;
-        private float _frequencyResolution;
         private float[] _spectrum;
 
         [SerializeReference] PropertyBinder[] _propertyBinders = null;
@@ -47,30 +46,19 @@ namespace WaveBinder.Runtime
         }
         #endregion
 
-
-
         //amplitude
         [HideInInspector]
         public float _amplitude, _amplitudeBuffer;
         float _amplitudeHighest = 0.01f;
-
-
-        //profiler 
-        // this variable will smooth the visualization
-        public float _audioProfiler;
-
         private bool _NoAudioClip;
-
         private void Awake()
         {
-            _audioSamplingRate = AudioSettings.outputSampleRate;
             _audioSource = GetComponent<AudioSource>();
             if (_audioClip != null)
             {
                 _audioSource.clip = _audioClip;
                 _audioSource.Play();    
             }
-
             if(_audioSource.clip != null && _audioClip == null)
             {
                 _audioClip = _audioSource.clip;
@@ -88,7 +76,6 @@ namespace WaveBinder.Runtime
                 return;
             }
             UpdateAudioBands();
-            AudioProfiler(_audioProfiler);
         }
 
         void Update()
@@ -97,7 +84,8 @@ namespace WaveBinder.Runtime
             {
                 return;
             }
-            GetSpectrumData();            
+
+            
             GenerateFrequencyBands();
 
             foreach(var band in _bandList)
@@ -111,13 +99,28 @@ namespace WaveBinder.Runtime
             {
                 foreach (var propertyBinder in _propertyBinders)
                 {
-                    propertyBinder.Level = _bandList[propertyBinder.AudioBand]._normalizedAmpBuffer;
+                    if (_bandList[propertyBinder.AudioBand]._Smoothing)
+                    {
+                        propertyBinder.Level = _bandList[propertyBinder.AudioBand]._normalizedAmpBuffer;
+                    }
+                    else
+                    {
+                        propertyBinder.Level = _bandList[propertyBinder.AudioBand]._normalizedAmp;
+                    }
+
                 }
             }
         }
 
-        void GenerateFrequencyBands()
-        {            
+        public void GenerateFrequencyBands()
+        {
+            _spectrum = GetSpectrumData();
+            if (_spectrum == null)
+            { 
+                Debug.Log("_spectrum null");
+                return;
+            }
+
             //this var stores the average of the samples for that freq band
             for (int i = 0; i < _bandList.Count; i++)
             {
@@ -155,23 +158,12 @@ namespace WaveBinder.Runtime
             _amplitude = currentAmplitude / _amplitudeHighest;
             _amplitudeBuffer = currentAmplitudeBuffer / _amplitudeHighest;
         }
-        // Pre-read the highest values so at the start of the audio file already it is initialized to use
-        void AudioProfiler(float audioProfiler)
-        {
-            foreach(var band in _bandList)
-            {
-                band.AudioProfiler(audioProfiler);
-            }
-        }
         void UpdateAudioBands()
         {
-            Debug.Log("nSample: "+_nSamples);
-            _frequencyResolution = (float)_audioSamplingRate / _nSamples;
-            Debug.Log("Frequency resolution: " + _frequencyResolution);
-
             foreach (var band in _bandList)
             {
-                band.MapFrequencyToSamples(_frequencyResolution, _nSamples);
+                band.Init();
+                band.MapFrequencyToSamples(_nSamples);
             }
         }
     }

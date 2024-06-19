@@ -29,7 +29,6 @@ namespace WaveBinder.Editor
             rect.x += (rect.width - 200) * 0.5f;
             rect.width = 200;
 
-
             if (GUI.Button(rect, "Add audio band"))
             {
                 OnNewAddAudioBand();
@@ -51,13 +50,13 @@ namespace WaveBinder.Editor
             EditorGUILayout.PropertyField(finder["_minRangeFrequency"]);
             if (EditorGUI.EndChangeCheck())
             {
-                Debug.Log("Min range frequ cahnged");
+                //Debug.Log("Min range frequ cahnged");
             }
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(finder["_maxRangeFrequency"]);
             if (EditorGUI.EndChangeCheck())
             {
-                Debug.Log("Max range frequ cahnged");
+                //Debug.Log("Max range frequ cahnged");
             }
             EditorGUILayout.PropertyField(finder["_smoothFactor"]);
 

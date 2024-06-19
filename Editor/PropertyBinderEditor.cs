@@ -124,7 +124,6 @@ namespace WaveBinder.Editor
                 return false; 
             }
 
-
             string[] candidates = new string[_audioBands.arraySize];
 
             for(int i = 0; i< _audioBands.arraySize; i++) 

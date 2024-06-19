@@ -8,6 +8,8 @@ using WaveBinder.Runtime;
 [Serializable]
 public class AudioBand
 {
+    const int MIN_FREQUENCY = 20;
+    const int MAX_FREQUENCY = 20000;
     // Detrmine the range of frequencies the audio band takes
     [SerializeField,Range(20,20000)]
     public int _minRangeFrequency = 20;
@@ -17,10 +19,8 @@ public class AudioBand
     private int _minRangeSample = 0;
     private int _maxRangeSample = 0;
 
-    [SerializeField,Range(0.01f,10f)]
+    [SerializeField,Range(0.001f,10f)]
     private float _smoothFactor = 1f;
-    //the buffer band will store values of freqBand to after make smooth transition between values
-    // also we will use the buffers as they will have the controlled value of the signal so the cahnges are not so harsh
 
     public float _amplitude { get; private set; }
     public float _amplitudeBuffer { get; private set; }
@@ -29,23 +29,36 @@ public class AudioBand
 
     public float _normalizedAmp { get; private set; }
     public float _normalizedAmpBuffer { get; private set; }  
+
+    public bool _Smoothing { get; private set; } 
     public AudioBand(int minRange, int maxRange)
     {
         this._minRangeFrequency = minRange;
         this._maxRangeFrequency = maxRange;
 
-        _amplitude = 0;
-        _amplitudeBuffer = 0;
-        _amplitudeDecrease = 0;
-        _amplitudeHighest = 0;
-        _normalizedAmp = 0;
-        _normalizedAmpBuffer = 0;
+        _amplitude = 1;
+        _amplitudeBuffer = 1;
+        _amplitudeDecrease = 1;
+        _amplitudeHighest = 1;
+        _normalizedAmp = 1;
+        _normalizedAmpBuffer = 1;
+        _Smoothing = true;
     }
 
-    public void MapFrequencyToSamples(float frequencyResolution,int nSamples)
+    public void Init()
+    {
+        _amplitude = 1;
+        _amplitudeBuffer = 1;
+        _amplitudeDecrease = 1;
+        _amplitudeHighest = 1;
+        _normalizedAmp = 1;
+        _normalizedAmpBuffer = 1;
+    }
+
+    public void MapFrequencyToSamples(int nSamples)
     {
 
-        var result = LinearInterpolation.MapRange(_minRangeFrequency, _maxRangeFrequency, 20, 20000, 0, nSamples);
+        var result = LinearInterpolation.MapRange(_minRangeFrequency, _maxRangeFrequency, MIN_FREQUENCY, MAX_FREQUENCY, 0, nSamples);
 
         _minRangeSample = result.Item1;
         _maxRangeSample = result.Item2;
@@ -58,13 +71,17 @@ public class AudioBand
         if (_amplitude > _amplitudeBuffer)
         {
             _amplitudeBuffer = _amplitude;
-            _amplitudeDecrease = 0.001f * _smoothFactor;
+            _amplitudeDecrease = 0.0001f * _smoothFactor;
         }
         if (_amplitudeBuffer > _amplitude)
         {
             _amplitudeBuffer -= _amplitudeDecrease;
+            if(_amplitudeBuffer <= 0 )
+            {
+                _amplitudeBuffer = 0.001f;
+            }
             //increase the decrease speed by 20%
-            _amplitudeDecrease *= 1.2f; 
+            _amplitudeDecrease *= 1.1f; 
         }
         if(_amplitude > _amplitudeHighest)
         {
@@ -72,7 +89,7 @@ public class AudioBand
         }
 
         _normalizedAmp = (_amplitude / _amplitudeHighest);
-        _normalizedAmpBuffer = (_amplitudeBuffer / _amplitudeHighest); 
+        _normalizedAmpBuffer = (_amplitudeBuffer / _amplitudeHighest);
     }
     public void SetFrequencyRange(int min,int max)
     {
@@ -84,10 +101,6 @@ public class AudioBand
 
         _minRangeFrequency = min;
         _maxRangeFrequency = max;
-    }
-    public void AudioProfiler(float profiler)
-    {
-        _amplitudeHighest = profiler;
     }
     public int GetMinRangeSample()
     {
