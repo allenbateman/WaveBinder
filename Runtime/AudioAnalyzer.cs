@@ -25,6 +25,11 @@ namespace WaveBinder.Runtime
             Stereo, Left, Right
         }
         public _Channels _channel = new _Channels();
+
+
+        [SerializeField, Range(10f, 100f)]
+        private float _sensitivity = 10f;
+        
         private float[] _spectrum;
 
         [SerializeReference] PropertyBinder[] _propertyBinders = null;
@@ -136,7 +141,7 @@ namespace WaveBinder.Runtime
                 }
                 average /= (maxSampleIndex - minSampleIndex);
                 //multiply the average to work with higher values in high frequencies
-                _bandList[i].SetAmplitude(average*10);
+                _bandList[i].SetAmplitude(average* _sensitivity);
             }
         }
         //get average amplitude of the whole spectrum

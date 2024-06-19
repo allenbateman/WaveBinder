@@ -16,6 +16,7 @@ namespace WaveBinder.Editor
         SerializedProperty _fftWindow;
         SerializedProperty _channel;
         SerializedProperty _bandList;
+        SerializedProperty _sensitivity;
 
         bool _DispalySpectrum;
         Texture2D _spectrumTex;
@@ -32,6 +33,7 @@ namespace WaveBinder.Editor
             _fftWindow  = finder["_fftWindow"];
             _channel    = finder["_channel"];
             _bandList   = finder["_bandList"];
+            _sensitivity = finder["_sensitivity"];
 
             // Link the SerializedProperty to the variable 
             _propertyBinderEditor = new PropertyBinderEditor(finder["_propertyBinders"],_bandList);
@@ -44,6 +46,7 @@ namespace WaveBinder.Editor
             EditorGUILayout.PropertyField(_audioClip);
             EditorGUILayout.PropertyField(_fftWindow);
             EditorGUILayout.PropertyField(_nSamples);
+            EditorGUILayout.PropertyField(_sensitivity);
             //EditorGUILayout.PropertyField(_channel);
             //EditorGUILayout.PropertyField(_bandList);
 

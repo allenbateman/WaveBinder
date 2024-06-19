@@ -19,7 +19,7 @@ public class AudioBand
     private int _minRangeSample = 0;
     private int _maxRangeSample = 0;
 
-    [SerializeField,Range(0.001f,10f)]
+    [SerializeField,Range(0.0001f,10f)]
     private float _smoothFactor = 1f;
 
     public float _amplitude { get; private set; }
@@ -53,6 +53,7 @@ public class AudioBand
         _amplitudeHighest = 1;
         _normalizedAmp = 1;
         _normalizedAmpBuffer = 1;
+        _Smoothing = true;
     }
 
     public void MapFrequencyToSamples(int nSamples)
@@ -62,8 +63,6 @@ public class AudioBand
 
         _minRangeSample = result.Item1;
         _maxRangeSample = result.Item2;
-
-        Debug.Log("Audio band sample range" + _minRangeSample + ", " +  _maxRangeSample);
     }
 
     public void Update()
@@ -71,7 +70,7 @@ public class AudioBand
         if (_amplitude > _amplitudeBuffer)
         {
             _amplitudeBuffer = _amplitude;
-            _amplitudeDecrease = 0.0001f * _smoothFactor;
+            _amplitudeDecrease = _smoothFactor;
         }
         if (_amplitudeBuffer > _amplitude)
         {
@@ -81,7 +80,7 @@ public class AudioBand
                 _amplitudeBuffer = 0.001f;
             }
             //increase the decrease speed by 20%
-            _amplitudeDecrease *= 1.1f; 
+            _amplitudeDecrease *= 1.2f; 
         }
         if(_amplitude > _amplitudeHighest)
         {
