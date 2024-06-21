@@ -18,6 +18,10 @@ https://github.com/allenbateman/WaveBinder.git
 
 ## Demos
 
+![image21](https://github.com/allenbateman/WaveBinder/assets/57528826/70e654cb-e97b-4bd8-962c-c335aca68136)
+
+This is the audio spectrum divided into frequency ranges used in music
+
 ## Audio Analyser 
 
 The audio analyser component is the main and only component of the tool, it allows you to add a desired audio clip to analyse, select the number of samples (the sample resolution) and also to select the windowing algorithm to analyse the audio clip. 
