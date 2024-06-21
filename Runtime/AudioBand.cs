@@ -66,7 +66,7 @@ public class AudioBand
         _minRangeSample = result.Item1;
         _maxRangeSample = result.Item2;
 
-        Debug.Log($"Range {_minRangeSample}, {_maxRangeSample}");
+        //Debug.Log($"Range {_minRangeSample}, {_maxRangeSample}");
     }
 
     public void Update()
