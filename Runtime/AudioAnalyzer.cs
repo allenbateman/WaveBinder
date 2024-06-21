@@ -15,10 +15,16 @@ namespace WaveBinder.Runtime
         #region Editor fields
         AudioSource _audioSource;
         public AudioClip _audioClip;
-        public List<AudioBand> _bandList = new List<AudioBand>() { new AudioBand(0,20000)};
+        public List<AudioBand> _bandList = new List<AudioBand>() { new AudioBand(20,60),
+                                                                   new AudioBand(60,250),
+                                                                   new AudioBand(250,500),
+                                                                   new AudioBand(500,2000),
+                                                                   new AudioBand(2000,4000),
+                                                                   new AudioBand(4000,6000),
+                                                                   new AudioBand(6000,20000)};
        
         [PowerOfTwoSlider]
-        public int _nSamples = 128;
+        public int _nSamples = 512;
         public FFTWindow _fftWindow;
         public enum _Channels
         {

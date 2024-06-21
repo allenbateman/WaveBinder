@@ -20,7 +20,7 @@ public class AudioBand
     private int _maxRangeSample = 0;
 
     [SerializeField,Range(0.0001f,1f)]
-    private float _smoothFactor = 1f;
+    private float _smoothFactor = .5f;
 
     public float _amplitude { get; private set; }
     public float _amplitudeBuffer { get; private set; }
@@ -30,6 +30,8 @@ public class AudioBand
     public float _normalisedAmp { get; private set; }
     public float _normalisedAmpBuffer { get; private set; }  
 
+
+    //TODO Apply toggle to enable/Disable smoothing
     public bool _Smoothing { get; private set; }
     public AudioBand(int minRange, int maxRange)
     {
@@ -63,6 +65,8 @@ public class AudioBand
 
         _minRangeSample = result.Item1;
         _maxRangeSample = result.Item2;
+
+        Debug.Log($"Range {_minRangeSample}, {_maxRangeSample}");
     }
 
     public void Update()
