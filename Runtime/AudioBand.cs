@@ -19,7 +19,7 @@ public class AudioBand
     private int _minRangeSample = 0;
     private int _maxRangeSample = 0;
 
-    [SerializeField,Range(0.0001f,10f)]
+    [SerializeField,Range(0.0001f,1f)]
     private float _smoothFactor = 1f;
 
     public float _amplitude { get; private set; }
@@ -27,10 +27,10 @@ public class AudioBand
     private float _amplitudeDecrease = 0; // speed with which the buffer decreases
     private float _amplitudeHighest = 0;
 
-    public float _normalizedAmp { get; private set; }
-    public float _normalizedAmpBuffer { get; private set; }  
+    public float _normalisedAmp { get; private set; }
+    public float _normalisedAmpBuffer { get; private set; }  
 
-    public bool _Smoothing { get; private set; } 
+    public bool _Smoothing { get; private set; }
     public AudioBand(int minRange, int maxRange)
     {
         this._minRangeFrequency = minRange;
@@ -40,8 +40,8 @@ public class AudioBand
         _amplitudeBuffer = 1;
         _amplitudeDecrease = 1;
         _amplitudeHighest = 1;
-        _normalizedAmp = 1;
-        _normalizedAmpBuffer = 1;
+        _normalisedAmp = 1;
+        _normalisedAmpBuffer = 1;
         _Smoothing = true;
     }
 
@@ -51,8 +51,8 @@ public class AudioBand
         _amplitudeBuffer = 1;
         _amplitudeDecrease = 1;
         _amplitudeHighest = 1;
-        _normalizedAmp = 1;
-        _normalizedAmpBuffer = 1;
+        _normalisedAmp = 1;
+        _normalisedAmpBuffer = 1;
         _Smoothing = true;
     }
 
@@ -87,8 +87,8 @@ public class AudioBand
             _amplitudeHighest = _amplitude;
         }
 
-        _normalizedAmp = (_amplitude / _amplitudeHighest);
-        _normalizedAmpBuffer = (_amplitudeBuffer / _amplitudeHighest);
+        _normalisedAmp = (_amplitude / _amplitudeHighest);
+        _normalisedAmpBuffer = (_amplitudeBuffer / _amplitudeHighest);
     }
     public void SetFrequencyRange(int min,int max)
     {
@@ -121,4 +121,15 @@ public class AudioBand
     {
         _amplitude = amp;
     }
+
+    public float GetNormalisedAmp()
+    {
+        return _normalisedAmp;
+    }
+
+    public float GetNormalisedAmpBuff()
+    {
+        return _normalisedAmpBuffer;
+    }
+
 }

@@ -385,20 +385,20 @@ MonoBehaviour:
   _audioClip: {fileID: 8300000, guid: 4919a4c97578f5242b04d070e06c809c, type: 3}
   _bandList:
   - _minRangeFrequency: 20
-    _maxRangeFrequency: 1000
+    _maxRangeFrequency: 6899
     _smoothFactor: 1
-  - _minRangeFrequency: 10508
+  - _minRangeFrequency: 20
     _maxRangeFrequency: 20000
     _smoothFactor: 1
-  _nSamples: 512
+  _nSamples: 128
   _fftWindow: 0
   _channel: 0
+  _sensitivity: 10
   _propertyBinders:
   - rid: 3680314301686743040
   - rid: 3680314301686743041
   _amplitude: 0
   _amplitudeBuffer: 0
-  _audioProfiler: 0
   references:
     version: 2
     RefIds:

@@ -1,15 +1,18 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Rendering;
+using WaveBinder.Runtime;
 namespace WaveBinder.Editor
 {
     public class AudioBandEditor
     {
 
         SerializedProperty _bandList;
-        public AudioBandEditor(SerializedProperty audioBands)
+        AudioAnalyzer _analyzer;
+        public AudioBandEditor(AudioAnalyzer analyser,SerializedProperty audioBands)
         {
             _bandList = audioBands;
+            _analyzer = analyser;
         }
 
 
@@ -50,13 +53,13 @@ namespace WaveBinder.Editor
             EditorGUILayout.PropertyField(finder["_minRangeFrequency"]);
             if (EditorGUI.EndChangeCheck())
             {
-                //Debug.Log("Min range frequ cahnged");
+                _analyzer.UpdateBandRange(i);
             }
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(finder["_maxRangeFrequency"]);
             if (EditorGUI.EndChangeCheck())
             {
-                //Debug.Log("Max range frequ cahnged");
+                _analyzer.UpdateBandRange(i);
             }
             EditorGUILayout.PropertyField(finder["_smoothFactor"]);
 

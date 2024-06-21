@@ -80,7 +80,9 @@ namespace WaveBinder.Runtime
             {
                 return;
             }
-            UpdateAudioBands();
+            InitAduioBands();
+
+            UpdateAllBandRange();
         }
 
         void Update()
@@ -90,36 +92,20 @@ namespace WaveBinder.Runtime
                 return;
             }
 
+            GetSpectrumData();
             
-            GenerateFrequencyBands();
+            SetDataToAudioBands();
 
-            foreach(var band in _bandList)
-            {
-                band.Update();
-            }
+            UpdateAudioBands();
 
-            GetAmplitud();
-            
-            if (_propertyBinders != null)
-            {
-                foreach (var propertyBinder in _propertyBinders)
-                {
-                    if (_bandList[propertyBinder.AudioBand]._Smoothing)
-                    {
-                        propertyBinder.Level = _bandList[propertyBinder.AudioBand]._normalizedAmpBuffer;
-                    }
-                    else
-                    {
-                        propertyBinder.Level = _bandList[propertyBinder.AudioBand]._normalizedAmp;
-                    }
+            UpdateAmplitude();
 
-                }
-            }
+            UpdatePropertyBinderValues();
         }
 
-        public void GenerateFrequencyBands()
+        public void SetDataToAudioBands()
         {
-            _spectrum = GetSpectrumData();
+
             if (_spectrum == null)
             { 
                 Debug.Log("_spectrum null");
@@ -145,15 +131,15 @@ namespace WaveBinder.Runtime
             }
         }
         //get average amplitude of the whole spectrum
-        void GetAmplitud()
+        void UpdateAmplitude()
         {
             float currentAmplitude = 0f;
             float currentAmplitudeBuffer = 0f;
 
             foreach(var band in _bandList)
             {
-                currentAmplitude += band._normalizedAmp;
-                currentAmplitudeBuffer += band._normalizedAmpBuffer;
+                currentAmplitude += band._normalisedAmp;
+                currentAmplitudeBuffer += band._normalisedAmpBuffer;
             }
             if (currentAmplitude > _amplitudeHighest)
             {
@@ -163,12 +149,49 @@ namespace WaveBinder.Runtime
             _amplitude = currentAmplitude / _amplitudeHighest;
             _amplitudeBuffer = currentAmplitudeBuffer / _amplitudeHighest;
         }
-        void UpdateAudioBands()
+        private void InitAduioBands()
         {
             foreach (var band in _bandList)
             {
                 band.Init();
+            }
+        }
+
+        public void UpdateBandRange(int i)
+        {
+            _bandList[i].MapFrequencyToSamples(_nSamples);
+        }
+        public void UpdateAllBandRange()
+        {
+            foreach (var band in _bandList)
+            {
                 band.MapFrequencyToSamples(_nSamples);
+            }
+        }
+
+        private void UpdateAudioBands()
+        {
+            foreach (var band in _bandList)
+            {
+                band.Update();
+            }
+        }
+        private void UpdatePropertyBinderValues()
+        {
+            if (_propertyBinders != null)
+            {
+                foreach (var propertyBinder in _propertyBinders)
+                {
+                    if (_bandList[propertyBinder.AudioBand]._Smoothing)
+                    {
+                        propertyBinder.Level = _bandList[propertyBinder.AudioBand]._normalisedAmpBuffer;
+                    }
+                    else
+                    {
+                        propertyBinder.Level = _bandList[propertyBinder.AudioBand]._normalisedAmp;
+                    }
+
+                }
             }
         }
     }

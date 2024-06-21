@@ -40,13 +40,15 @@ namespace WaveBinder.Runtime
             // Ensure valueMin does not exceed valueMax
             if (valueMin > valueMax)
             {
-                throw new ArgumentException("valueMin cannot be greater than valueMax.");
+                Debug.LogError("Min value cannot be greater than Max value.");
+                return (0,1);
             }
 
             // Ensure newMin does not exceed newMax
             if (newMin > newMax)
             {
-                throw new ArgumentException("newMin cannot be greater than newMax.");
+                Debug.LogError("Min frequency cannot be greater than Max frequency.");
+                return (0, 1);
             }
 
             // Map valueMin to newMin and valueMax to newMax

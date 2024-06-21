@@ -14,7 +14,6 @@ namespace WaveBinder.Editor
         SerializedProperty _audioClip;
         SerializedProperty _nSamples;
         SerializedProperty _fftWindow;
-        SerializedProperty _channel;
         SerializedProperty _bandList;
         SerializedProperty _sensitivity;
 
@@ -25,19 +24,19 @@ namespace WaveBinder.Editor
         {
             var finder = new PropertyFinder(serializedObject);
 
-
-            //_value = serializedObject.FindProperty("value"); 
             //propertyFinder utility saves some code lines
             _audioClip  = finder["_audioClip"];
             _nSamples   = finder["_nSamples"];
             _fftWindow  = finder["_fftWindow"];
-            _channel    = finder["_channel"];
             _bandList   = finder["_bandList"];
             _sensitivity = finder["_sensitivity"];
 
             // Link the SerializedProperty to the variable 
             _propertyBinderEditor = new PropertyBinderEditor(finder["_propertyBinders"],_bandList);
-            _audioBandEditor = new AudioBandEditor(_bandList);
+
+            // Pass the AudioAnalyzer instance to the AudioBandEditor
+            AudioAnalyzer analyzer = (AudioAnalyzer)target;
+            _audioBandEditor = new AudioBandEditor(analyzer, _bandList);
         }
         public override void OnInspectorGUI()
         {
@@ -47,9 +46,6 @@ namespace WaveBinder.Editor
             EditorGUILayout.PropertyField(_fftWindow);
             EditorGUILayout.PropertyField(_nSamples);
             EditorGUILayout.PropertyField(_sensitivity);
-            //EditorGUILayout.PropertyField(_channel);
-            //EditorGUILayout.PropertyField(_bandList);
-
 
             _DispalySpectrum = EditorGUILayout.Toggle("Display Spectrum", _DispalySpectrum);
             if(_DispalySpectrum)
@@ -70,6 +66,11 @@ namespace WaveBinder.Editor
                 _audioBandEditor.ShowGUI();
                 _propertyBinderEditor.ShowGUI(); 
             }
+        }
+
+        public void UpdateAudioBandRange()
+        {
+
         }
 
         void RenderAudioSpectrum()
@@ -105,15 +106,6 @@ namespace WaveBinder.Editor
                         {
                             colors[y * width + x] = Color.black;
                         }
-
-                        //if (y < amplitude)
-                        //{
-                        //    colors[y * width + x] = Color.white;
-                        //}
-                        //else
-                        //{
-                        //    colors[y * width + x] = Color.black;
-                        //}
                     }
                 }
                 _spectrumTex.SetPixels(colors);
