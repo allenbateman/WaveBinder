@@ -5,11 +5,17 @@
   "description": "Final grade project. An audio tool that reads frequency sprectum from audio sources that lets you map any simple data type you desire!",
   "unity": "2022.3",
   "dependencies": {},
-  "testables": [ "Tests" ],
   "keywords": [ "audio", "tool", "music", "reactive", "editor", "inspector", "utility" ],
   "author": {
     "name": "Allen Bateman",
     "email": "allen.bateman.neubert@estudiantat.upc.edu",
     "url": "https://github.com/allenbateman/WaveBinder"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Sample1",
+      "description": "Contains a scene with a track playing to show audio bands binded to scene proeperties",
+      "path": "Samples~/Sample1"
+    }
+  ]
 }
