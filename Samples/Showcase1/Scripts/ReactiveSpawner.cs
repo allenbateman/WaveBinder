@@ -10,6 +10,7 @@ public class ReactiveSpawner : MonoBehaviour
     [SerializeField]
     float spawnThreshold;
 
+    bool CanSpawn = true;
     public float SpawnValue
     {
         get { return spawnValue; }
@@ -19,9 +20,12 @@ public class ReactiveSpawner : MonoBehaviour
 
     void Update()
     {
-        if(spawnThreshold < spawnValue)
+        if (CanSpawn && spawnThreshold <= spawnValue)
         {
-            Instantiate(Prefab,transform.position,transform.rotation);
+            Instantiate(Prefab, transform.position, transform.rotation);
+            CanSpawn = false;
         }
+        else if (!CanSpawn && spawnValue <= 0.3)
+            CanSpawn = true;
     }
 }

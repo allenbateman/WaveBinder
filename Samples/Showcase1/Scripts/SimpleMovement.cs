@@ -8,6 +8,6 @@ public class SimpleMovement : MonoBehaviour
     float speed;
     void Update()
     {
-        transform.Translate(transform.up * speed * Time.deltaTime);
+        transform.Translate(transform.right * speed * Time.deltaTime);
     }
 }
