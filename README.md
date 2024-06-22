@@ -15,6 +15,9 @@ https://github.com/allenbateman/WaveBinder.git
 
 ![packageManager](https://github.com/allenbateman/WaveBinder/assets/57528826/e7be11cd-4296-4cf4-b116-31d24c5448c6)
 
+Import the sample scene that fits the configuration of your project Standard/URP
+
+![Sample Scenes](https://github.com/allenbateman/WaveBinder/assets/57528826/a82f0306-4e83-4c67-ad50-db29715d3672)
 
 ## Demos
 
