@@ -13,9 +13,14 @@
   },
   "samples": [
     {
-      "displayName": "Sample1",
+      "displayName": "Sample URP",
       "description": "Contains a scene with a track playing to show audio bands binded to scene proeperties",
-      "path": "Samples~/Sample1"
+      "path": "Samples~/SampleURP"
+    },
+    {
+      "displayName": "Sample Standard",
+      "description": "Contains a scene with a track playing to show audio bands binded to scene proeperties",
+      "path": "Samples~/SampleStandard"
     }
   ]
 }
