@@ -5,6 +5,7 @@
   "description": "Final grade project. An audio tool that reads frequency sprectum from audio sources that lets you map any simple data type you desire!",
   "unity": "2022.3",
   "dependencies": {},
+  "testables": [ "Samples" ],
   "keywords": [ "audio", "tool", "music", "reactive", "editor", "inspector", "utility" ],
   "author": {
     "name": "Allen Bateman",
