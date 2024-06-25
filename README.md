@@ -27,7 +27,13 @@ This is the audio spectrum divided into frequency ranges used in music
 
 ## Audio Analyser 
 
-The audio analyser component is the main and only component of the tool, it allows you to add a desired audio clip to analyse, select the number of samples (the sample resolution) and also to select the windowing algorithm to analyse the audio clip. 
+The audio analyser component is the main and only component of the tool, it allows you to add a desired audio clip to analyse, select the number of samples (the sample resolution), and keep in mind that the more samples you choose more processing power will need so unless you need a high resolution of the audio data keep the samples low for simpler audios.
+
+The Windowing is an algorithm to analyse the audio spectrum depending on which one you choose it will be more precise and will require more processing power, a good in-between for quality and medium processing power is Blackman-Harris. 
+
+The sensitivity is a value multiplier on the sample values. If you add more sensitivity the lower amplitudes on the frequency spectrum will be more noticeable on the final normalized value. This sensitivity value has to be setup before runtime, setting it on runtime will affect the final output if you increase and lower it.
+
+Finally, a display spectrum toggle renders the sample values on a texture so you can visualize the raw audio spectrum data.
 
 ![AudioAnalyser Component](https://github.com/allenbateman/WaveBinder/assets/57528826/2c1cdba2-573b-47a9-b8f0-4151f1454936)
 
