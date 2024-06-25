@@ -14,12 +14,12 @@
   "samples": [
     {
       "displayName": "Sample URP",
-      "description": "Contains a scene with a track playing to show audio bands binded to scene proeperties",
+      "description": "Contains a scene with a track playing to show audio bands binded to scene proeperties using the universal render pipeline",
       "path": "Samples~/SampleURP"
     },
     {
       "displayName": "Sample Standard",
-      "description": "Contains a scene with a track playing to show audio bands binded to scene proeperties",
+      "description": "Contains a scene with a track playing to show audio bands binded to scene proeperties using the stardard render pipeline",
       "path": "Samples~/SampleStandard"
     }
   ]
