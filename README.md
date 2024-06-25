@@ -35,7 +35,7 @@ The sensitivity is a value multiplier on the sample values. If you add more sens
 
 Finally, a display spectrum toggle renders the sample values on a texture so you can visualize the raw audio spectrum data.
 
-![AudioAnalyser Component](https://github.com/allenbateman/WaveBinder/assets/57528826/2c1cdba2-573b-47a9-b8f0-4151f1454936)
+![image](https://github.com/allenbateman/WaveBinder/assets/57528826/5161efa5-a37a-4347-a128-7ebf1091e5d2)
 
 
 ### Audio Bands
